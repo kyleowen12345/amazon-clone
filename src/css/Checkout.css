@@ -1,0 +1,37 @@
+.checkout {
+	display: flex;
+	padding: 20px;
+	background-color: white;
+	height: max-content;
+}
+.checkout__left {
+	margin-left: auto;
+	margin-right: auto;
+}
+.checkout__title {
+	margin-right: 10px;
+	padding: 10px;
+	border-bottom: 1px solid lightgray;
+	font-weight: 500;
+}
+.checkout__ad {
+	width: 100%;
+	object-fit: contain;
+	margin-bottom: 10px;
+}
+.checkout__login {
+	text-decoration: none;
+	color: #0066c0;
+}
+.checkout__logintext {
+	font-weight: 500;
+}
+@media only screen and (max-width: 700px) {
+	.checkout {
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		background-color: white;
+		height: max-content;
+	}
+}
