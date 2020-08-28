@@ -23,6 +23,7 @@
 }
 .product__rating {
 	display: flex;
+	color: gold;
 }
 .product > img {
 	max-height: 200px;
@@ -44,18 +45,9 @@
 }
 @media only screen and (max-width: 700px) {
 	.product {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: flex-end;
-		max-height: 350px;
-		min-width: 100px;
-		background-color: white;
-		margin: 10px;
-		z-index: 1;
-		padding: 20px;
-		border-radius: 20px;
-		border: 1px solid lightgray;
 		width: 250px;
+	}
+	.product__info {
+		font-size: 1.1em;
 	}
 }

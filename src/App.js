@@ -42,7 +42,7 @@ function App() {
 			<div className="app">
 				<Switch>
 					<Route path="/checkout">
-						<Header />
+						<Header backButton="/" />
 						<Checkout />
 					</Route>
 					<Route path="/login">

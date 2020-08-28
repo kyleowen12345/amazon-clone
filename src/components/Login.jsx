@@ -3,6 +3,7 @@ import "../css/Login.css";
 import { Link, useHistory } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { useStateValue } from "../context/StateProvider";
+import loader from "../img/loading.gif";
 
 function Login() {
 	const [{ user }] = useStateValue();
@@ -13,10 +14,7 @@ function Login() {
 	const [loading, setLoading] = useState("");
 	const login = (e) => {
 		e.preventDefault();
-		if (!user)
-			setLoading(
-				"https://media2.giphy.com/media/sSgvbe1m3n93G/200w.gif?cid=ecf05e4794gsc5hkau7noshjd7dqmoblee3esiecijj6cfnv&rid=200w.gif"
-			);
+		if (!user) setLoading(loader);
 
 		auth
 			.signInWithEmailAndPassword(email, password)
@@ -28,10 +26,7 @@ function Login() {
 	};
 	const register = (e) => {
 		e.preventDefault();
-		if (!user)
-			setLoading(
-				"https://media2.giphy.com/media/sSgvbe1m3n93G/200w.gif?cid=ecf05e4794gsc5hkau7noshjd7dqmoblee3esiecijj6cfnv&rid=200w.gif"
-			);
+		if (!user) setLoading(setLoading(loader));
 		db.collection("buyers").add({
 			email: email,
 		});

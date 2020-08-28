@@ -3,6 +3,7 @@ import "../css/Product.css";
 import { useStateValue } from "../context/StateProvider";
 import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import StarRateIcon from "@material-ui/icons/StarRate";
 
 function Product({ id, title, price, rating, image }) {
 	const [{ user }, dispatch] = useStateValue();
@@ -33,7 +34,7 @@ function Product({ id, title, price, rating, image }) {
 					{Array(rating)
 						.fill()
 						.map((_) => (
-							<p key={uuid()}>✡ </p>
+							<StarRateIcon key={uuid()} />
 						))}
 				</div>
 			</div>
