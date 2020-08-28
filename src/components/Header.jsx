@@ -8,6 +8,7 @@ import { auth } from "../firebase";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Menu from "./Menu";
 
 function Header({ backButton }) {
 	const history = useHistory();
@@ -60,39 +61,7 @@ function Header({ backButton }) {
 						)}
 					</div>
 				</nav>
-				<div className="header__menu">
-					<div className="header__link">
-						<Link to={!user && "/login"} />
-						<div onClick={login} className="header__option">
-							{!user ? (
-								<div>
-									<h3>Hello</h3>
-								</div>
-							) : (
-								<span className="header__optionLineOne">
-									Hello <h4>{user?.email}</h4>
-								</span>
-							)}
-
-							<span className="header__optionLineTwo">
-								{user ? (
-									<Link to="/" className="header__out">
-										{"Sign Out?"}
-									</Link>
-								) : (
-									<Link to="/login" className="header__out">
-										{"Sign in/up?"}
-									</Link>
-								)}
-							</span>
-						</div>
-					</div>
-					<Link to="/" className="header__link">
-						<div className="header__option">
-							<span className="header__optionLineTwo">Returns & Orders</span>
-						</div>
-					</Link>
-				</div>
+				<Menu login={login} />
 			</div>
 		);
 	} else {

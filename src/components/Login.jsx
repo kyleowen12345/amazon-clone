@@ -26,7 +26,7 @@ function Login() {
 	};
 	const register = (e) => {
 		e.preventDefault();
-		if (!user) setLoading(setLoading(loader));
+		if (!user) setLoading(loader);
 		db.collection("buyers").add({
 			email: email,
 		});
@@ -49,46 +49,49 @@ function Login() {
 					className="login__logo"
 				/>
 			</Link>
-			<div className="login__container">
-				<h1>Sign in</h1>
-				<p className="login__verification">{verification}</p>
-				<form action="">
-					<h4>E-mail</h4>
-					{!loading ? (
-						<>
-							<input
-								type="email"
-								onChange={(e) => setEmail(e.target.value)}
-								value={email}
-							/>
-							<h4>Password</h4>
-							<input
-								type="password"
-								onChange={(e) => setPassword(e.target.value)}
-								value={password}
-							/>
-						</>
-					) : (
-						<img
-							src={loading}
-							alt="loading......"
-							value={loading}
-							className="login__loader"
+			{!loading ? (
+				<div className="login__container">
+					<h1>Sign in</h1>
+					<p className="login__verification">{verification}</p>
+					<form action="">
+						<h4>E-mail</h4>
+						<input
+							type="email"
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
 						/>
-					)}
-					<button onClick={login} type="submit" className="login__signInButton">
-						Sign In
+						<h4>Password</h4>
+						<input
+							type="password"
+							onChange={(e) => setPassword(e.target.value)}
+							value={password}
+						/>
+
+						<button
+							onClick={login}
+							type="submit"
+							className="login__signInButton"
+						>
+							Sign In
+						</button>
+					</form>
+					<p>
+						By signing-in you agree to Amazon's Conditions of Use & Sale. Please
+						see our Privacy Notice, our Cookie Notice and our Interest-Based Ads
+						Notice.
+					</p>
+					<button onClick={register} className="login__registerButton">
+						Create you Amazon Account
 					</button>
-				</form>
-				<p>
-					By signing-in you agree to Amazon's Conditions of Use & Sale. Please
-					see our Privacy Notice, our Cookie Notice and our Interest-Based Ads
-					Notice.
-				</p>
-				<button onClick={register} className="login__registerButton">
-					Create you Amazon Account
-				</button>
-			</div>
+				</div>
+			) : (
+				<img
+					src={loading}
+					alt="loading......"
+					value={loading}
+					className="login__loader"
+				/>
+			)}
 		</div>
 	);
 }

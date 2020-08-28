@@ -2,6 +2,7 @@ import React from "react";
 import "../css/CheckoutProduct.css";
 import { useStateValue } from "../context/StateProvider";
 import { v4 as uuid } from "uuid";
+import StarRateIcon from "@material-ui/icons/StarRate";
 
 function CheckoutProduct({ id, title, price, image, rating }) {
 	const [{}, dispatch] = useStateValue();
@@ -26,7 +27,7 @@ function CheckoutProduct({ id, title, price, image, rating }) {
 					{Array(rating)
 						.fill()
 						.map((_) => (
-							<p key={uuid()}>✡ </p>
+							<StarRateIcon key={uuid()} />
 						))}
 				</div>
 				<button onClick={removeBasket}>Remove from basket</button>
