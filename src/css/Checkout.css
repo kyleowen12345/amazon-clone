@@ -14,11 +14,6 @@
 	border-bottom: 1px solid lightgray;
 	font-weight: 500;
 }
-.checkout__ad {
-	width: 100%;
-	object-fit: contain;
-	margin-bottom: 10px;
-}
 .checkout__login {
 	text-decoration: none;
 	color: #0066c0;

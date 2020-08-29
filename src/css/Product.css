@@ -13,6 +13,7 @@
 	border: 1px solid lightgray;
 }
 .product__info {
+	padding-top: 10px;
 	height: 100px;
 	margin-bottom: 15px;
 	font-weight: 400;
@@ -43,11 +44,34 @@
 	color: #0066c0;
 	font-size: 14px;
 }
+@media only screen and (max-width: 950px) {
+	.product__info {
+		padding-top: 10px;
+		font-size: 1em;
+	}
+}
 @media only screen and (max-width: 700px) {
 	.product {
 		width: 250px;
 	}
 	.product__info {
-		font-size: 1.1em;
+		font-size: 0.9em;
+	}
+	.product > img {
+		width: 180px;
+		height: 150px;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.product {
+		width: 250px;
+	}
+	.product__info {
+		font-size: 0.9em;
+	}
+	.product > img {
+		padding-top: 10px;
+		width: 150px;
+		height: 100px;
 	}
 }

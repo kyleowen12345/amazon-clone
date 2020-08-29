@@ -15,7 +15,7 @@
 	z-index: -1;
 	margin-bottom: -150px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
 	.home__row {
 		display: flex;
 		flex-direction: column;

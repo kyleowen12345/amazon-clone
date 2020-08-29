@@ -7,6 +7,9 @@ import Checkout from "./components/Checkout";
 import Login from "./components/Login";
 import { useStateValue } from "./context/StateProvider";
 import { auth } from "./firebase";
+import Footer from "./components/Footer";
+import ScrollTop from "./components/ScrollTop";
+
 function App() {
 	const [{ user }, dispatch] = useStateValue();
 	// const [id, setId] = useState("");
@@ -44,6 +47,7 @@ function App() {
 					<Route path="/checkout">
 						<Header backButton="/" />
 						<Checkout />
+						<ScrollTop />
 					</Route>
 					<Route path="/login">
 						<Login />
@@ -51,10 +55,11 @@ function App() {
 					<Route path="/">
 						<Header />
 						<Home />
+						<ScrollTop />
+						<Footer />
 					</Route>
 				</Switch>
 			</div>
-			;
 		</Router>
 	);
 }

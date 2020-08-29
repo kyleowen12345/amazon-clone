@@ -1,0 +1,37 @@
+.scroll__toTop {
+	position: fixed;
+	bottom: 150px;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	z-index: 1;
+}
+.scroll__toTop > .MuiSvgIcon-root {
+	margin-top: 10px;
+	font-size: 90px;
+	animation: scrollTop 0.5s alternate ease infinite;
+	cursor: pointer;
+	background-color: #f15a23;
+	color: #eaeded;
+	border-radius: 100%;
+}
+.scroll__toTop > .MuiSvgIcon-root:hover {
+	background-color: #ffffff00;
+	color: #f15a23;
+}
+@keyframes scrollTop {
+	from {
+		transform: translateY(-5px);
+	}
+	to {
+		transform: translateY(10px);
+	}
+}
+@media only screen and (max-width: 700px) {
+	.scroll__toTop > .MuiSvgIcon-root {
+		font-size: 50px;
+	}
+	.scroll__toTop {
+		bottom: 113px;
+	}
+}

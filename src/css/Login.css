@@ -21,8 +21,9 @@
 	font-size: 12px;
 	font-weight: 500;
 }
-.login__container > form > h5 {
+.login__container > form > h4 {
 	margin-bottom: 5px;
+	font-size: 17px;
 }
 .login__container > form > input {
 	height: 30px;
@@ -31,9 +32,10 @@
 	width: 98%;
 }
 .login__logo {
-	width: 100px;
+	width: 300px;
 	object-fit: contain;
 	margin: 20px 0 20px 0;
+	padding: 30px;
 }
 .login__signInButton {
 	background: #f0c14b;
@@ -63,4 +65,13 @@
 	object-fit: contain;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+@media only screen and (max-width: 850px) {
+	.login__logo {
+		width: 200px;
+		object-fit: contain;
+		margin: 20px 0 20px 0;
+		padding: 30px;
+	}
 }

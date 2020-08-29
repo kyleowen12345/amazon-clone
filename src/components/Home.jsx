@@ -76,14 +76,12 @@ function Home() {
 							image="https://m.media-amazon.com/images/I/61ivASYZKvL._AC_UY218_.jpg"
 						/>
 						<Product
-							id="123232351"
-							title="Dash DFAF455GBRD01 Deluxe Electric Air Fryer + Oven Cooker with Temperature Control, Non Stick Fry Basket, "
-							price={79.99}
+							id="1262331234"
+							title="Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band"
+							price={49.99}
 							rating={5}
-							image="https://m.media-amazon.com/images/I/716ck0cDsaL._AC_UY218_.jpg"
+							image="https://m.media-amazon.com/images/I/71fwbMm1NBL._AC_UY218_.jpg"
 						/>
-					</div>
-					<div className="home__row">
 						<Product
 							id="923341234"
 							title="
@@ -92,12 +90,14 @@ function Home() {
 							rating={5}
 							image="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UY218_.jpg"
 						/>
+					</div>
+					<div className="home__row">
 						<Product
-							id="1262331234"
-							title="Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band"
-							price={49.99}
+							id="123232351"
+							title="Dash DFAF455GBRD01 Deluxe Electric Air Fryer + Oven Cooker with Temperature Control, Non Stick Fry Basket, "
+							price={79.99}
 							rating={5}
-							image="https://m.media-amazon.com/images/I/71fwbMm1NBL._AC_UY218_.jpg"
+							image="https://m.media-amazon.com/images/I/716ck0cDsaL._AC_UY218_.jpg"
 						/>
 					</div>
 					<div className="home__row">
@@ -110,14 +110,11 @@ function Home() {
 						/>
 						<Product
 							id="1237567563434"
-							title="Best Seller
-							COSORI Smart WiFi Air Fryer 5.8QT(100 Recipes), Digital Touchscreen with 11 Cooking Presets for Air Frying "
+							title="Toshiba TF-32A710U21 32-inch Smart HD TV - Fire TV Edition"
 							price={49.99}
 							rating={5}
-							image="https://m.media-amazon.com/images/I/71NCsHet1NL._AC_UY218_.jpg"
+							image="https://m.media-amazon.com/images/I/614bao-CmtL._AC_UY218_.jpg"
 						/>
-					</div>
-					<div className="home__row">
 						<Product
 							id="12341234"
 							title="Echo Dot (3rd Gen) - Smart speaker with Alexa - Charcoal"
@@ -125,12 +122,14 @@ function Home() {
 							rating={5}
 							image="https://m.media-amazon.com/images/I/6182S7MYC2L._AC_UY218_.jpg"
 						/>
+					</div>
+					<div className="home__row">
 						<Product
 							id="123232351"
-							title="Google Pixel 3 64GB Unlocked GSM & CDMA 4G LTE - Just Black (Renewed)"
-							price={49.99}
+							title="eufy by Anker, BoostIQ RoboVac 11S (Slim), Robot Vacuum Cleaner, Super-Thin, 1300Pa Strong Suction, Quiet, "
+							price={159.99}
 							rating={5}
-							image="https://m.media-amazon.com/images/I/71s35mTkAQL._AC_UY218_.jpg"
+							image="https://m.media-amazon.com/images/I/71TmTj7HjNL._AC_UY218_.jpg"
 						/>
 					</div>
 					<div className="home__row">
@@ -148,8 +147,6 @@ function Home() {
 							rating={5}
 							image="https://m.media-amazon.com/images/I/71fwbMm1NBL._AC_UY218_.jpg"
 						/>
-					</div>
-					<div className="home__row">
 						<Product
 							id="121312411234"
 							title="Samsung Galaxy S10+, 128GB, Prism Blue - Fully Unlocked (Renewed)"
@@ -157,12 +154,38 @@ function Home() {
 							rating={5}
 							image="https://m.media-amazon.com/images/I/61riXOZAl5L._AC_UY218_.jpg"
 						/>
+					</div>
+					<div className="home__row">
 						<Product
 							id="1237567563434"
-							title="Toshiba TF-32A710U21 32-inch Smart HD TV - Fire TV Edition"
+							title="Best Seller
+							COSORI Smart WiFi Air Fryer 5.8QT(100 Recipes), Digital Touchscreen with 11 Cooking Presets for Air Frying "
 							price={49.99}
 							rating={5}
-							image="https://m.media-amazon.com/images/I/614bao-CmtL._AC_UY218_.jpg"
+							image="https://m.media-amazon.com/images/I/71NCsHet1NL._AC_UY218_.jpg"
+						/>
+					</div>
+					<div className="home__row">
+						<Product
+							id="1262331234"
+							title="Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band"
+							price={149.99}
+							rating={5}
+							image="https://m.media-amazon.com/images/I/51eJvZB-RLL._AC_UY218_.jpg"
+						/>
+						<Product
+							id="123232351"
+							title="Google Pixel 3 64GB Unlocked GSM & CDMA 4G LTE - Just Black (Renewed)"
+							price={49.99}
+							rating={5}
+							image="https://m.media-amazon.com/images/I/71s35mTkAQL._AC_UY218_.jpg"
+						/>
+						<Product
+							id="923341234"
+							title="Cuisinart BFP-703BC Smart Power Duet Blender/Food Processor, Brushed Chrome"
+							price={89.99}
+							rating={5}
+							image="https://m.media-amazon.com/images/I/81VdLc+R9ML._AC_UY218_.jpg"
 						/>
 					</div>
 					<div className="home__row">
@@ -172,29 +195,6 @@ function Home() {
 							price={79.99}
 							rating={5}
 							image="https://m.media-amazon.com/images/I/51zwq4syfAL._AC_UY218_.jpg"
-						/>
-						<Product
-							id="123232351"
-							title="eufy by Anker, BoostIQ RoboVac 11S (Slim), Robot Vacuum Cleaner, Super-Thin, 1300Pa Strong Suction, Quiet, "
-							price={159.99}
-							rating={5}
-							image="https://m.media-amazon.com/images/I/71TmTj7HjNL._AC_UY218_.jpg"
-						/>
-					</div>
-					<div className="home__row">
-						<Product
-							id="923341234"
-							title="Cuisinart BFP-703BC Smart Power Duet Blender/Food Processor, Brushed Chrome"
-							price={89.99}
-							rating={5}
-							image="https://m.media-amazon.com/images/I/81VdLc+R9ML._AC_UY218_.jpg"
-						/>
-						<Product
-							id="1262331234"
-							title="Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminum Case with Black Sport Band"
-							price={149.99}
-							rating={5}
-							image="https://m.media-amazon.com/images/I/51eJvZB-RLL._AC_UY218_.jpg"
 						/>
 					</div>
 					<div className="home__row">

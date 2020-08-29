@@ -9,6 +9,7 @@
 	display: flex;
 	align-items: center;
 	position: sticky;
+	justify-content: space-between;
 	top: 0;
 	z-index: 100;
 	width: 100%;
@@ -16,9 +17,9 @@
 }
 
 .header__logo {
-	width: 100px;
+	width: 110px;
 	margin-left: 20px;
-	margin-right: 20px;
+	margin-right: 90px;
 	margin-top: 18px;
 	object-fit: contain;
 }
@@ -42,10 +43,12 @@
 	display: block;
 	display: flex;
 	justify-content: space-evenly;
+	margin-left: 50px;
 }
 .header__link {
 	color: white;
 	text-decoration: none;
+	padding: 15px 20px;
 }
 .header__option {
 	display: flex;
@@ -54,15 +57,19 @@
 	margin-right: 10px;
 }
 .header__optionLineOne {
-	font-size: 10px;
+	font-size: 16px;
+	font-size: 300;
 }
 .header__optionLineTwo {
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 18px;
+	font-weight: 400;
 }
 .header__optionBasket {
 	display: flex;
 	align-items: center;
+}
+.header__optionBasket > .MuiSvgIcon-root {
+	font-size: 27px;
 }
 .header__optionBasket:hover {
 	color: rgb(4, 182, 4);
@@ -74,7 +81,8 @@
 .header__out {
 	color: white;
 	text-decoration: none;
-	font-weight: 500;
+	font-weight: 300;
+	font-size: 20px;
 }
 .header__backIcon {
 	color: white;
@@ -105,16 +113,24 @@
 .header__menu {
 	background-color: #131921;
 	padding: 20px 10px;
-	height: 130px;
+	height: 220px;
 }
 
 .header__menu > .header__link > .header__option {
 	border-bottom: 1px solid gray;
-	margin-bottom: 10px;
-	padding: 10px;
+	margin-bottom: 5px;
+	padding: 10px 20px 20px 20px;
 }
-
-@media only screen and (max-width: 700px) {
+h4 {
+	font-size: 20px;
+	font-weight: 400;
+}
+@media only screen and (max-width: 1000px) {
+	.header__search {
+		display: none;
+	}
+}
+@media only screen and (max-width: 800px) {
 	.header__search {
 		display: none;
 	}
@@ -133,5 +149,48 @@
 	.header__humber > .MuiSvgIcon-root {
 		display: block;
 		cursor: pointer;
+	}
+	.header__logo {
+		width: 90px;
+	}
+	.header__link {
+		padding: 0px 5px;
+	}
+	.header__optionBasket > .MuiSvgIcon-root {
+		font-size: 20px;
+	}
+	.header__optionLineOne {
+		font-size: 12px;
+	}
+	.header__optionLineTwo {
+		font-size: 13px;
+		font-weight: 500;
+	}
+	.header__optionLineTwo {
+		font-size: 17px;
+		font-weight: 300;
+	}
+	h4 {
+		font-size: 16px;
+		font-weight: 350;
+	}
+	.header__out {
+		font-size: 17px;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.header__logo {
+		width: 70px;
+	}
+	.header__menu {
+		height: 150px;
+	}
+	.header__optionLineTwo {
+		font-size: 15px;
+		font-weight: 300;
+	}
+	h4 {
+		font-size: 12px;
+		font-weight: 300;
 	}
 }

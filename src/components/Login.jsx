@@ -27,15 +27,15 @@ function Login() {
 	const register = (e) => {
 		e.preventDefault();
 		if (!user) setLoading(loader);
-		db.collection("buyers").add({
-			email: email,
-		});
 
 		auth
 			.createUserWithEmailAndPassword(email, password)
 			.then((auth) => {
 				// create a user adn log in
 				history.push("/");
+				db.collection("buyers").add({
+					email: email,
+				});
 			})
 			.catch((e) => setVerification(e.message) & setLoading(""));
 	};
