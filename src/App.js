@@ -12,14 +12,6 @@ import ScrollTop from "./components/ScrollTop";
 
 function App() {
 	const [{ user }, dispatch] = useStateValue();
-	// const [id, setId] = useState("");
-	// const [item, setItem] = useState([]);
-	// useEffect(() => {
-	// 	db.collection("buyers").onSnapshot((snapshot) =>
-	// 		setId(snapshot.docs.map((doc) => doc.data()))
-	// 	);
-	// }, []);
-
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
@@ -38,11 +30,9 @@ function App() {
 			unsubscribe();
 		};
 	}, [user, dispatch]);
-	// console.log(id.toString());
-	// console.log(id);
 	return (
-		<Router>
-			<div className="app">
+		<div className="app">
+			<Router>
 				<Switch>
 					<Route path="/checkout">
 						<Header backButton="/" />
@@ -52,6 +42,21 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
+					{/* {user ? (
+						<Route path="/home/:id">
+							<Header />
+							<Home />
+							<ScrollTop />
+							<Footer />
+						</Route>
+					) : (
+						<Route path="/">
+							<Header />
+							<Home />
+							<ScrollTop />
+							<Footer />
+						</Route>
+					)} */}
 					<Route path="/">
 						<Header />
 						<Home />
@@ -59,8 +64,8 @@ function App() {
 						<Footer />
 					</Route>
 				</Switch>
-			</div>
-		</Router>
+			</Router>
+		</div>
 	);
 }
 

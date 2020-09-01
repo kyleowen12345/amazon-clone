@@ -14,6 +14,13 @@ function Header({ backButton }) {
 	const history = useHistory();
 	const [{ basket, user }] = useStateValue();
 	const [open, setOpen] = useState(false);
+	// const [emailId, setEmailId]=useState('')
+	// useEffect(()=>{
+	// 	db.collection('buyers').onSnapshot(snapshot=>setEmailId(snapshot.docs.map(doc=> ({
+	// 		id:doc.id,
+	// 		email:doc.data().email
+	// 	}))))
+	// },[user])
 	const login = () => {
 		if (user) {
 			auth.signOut();

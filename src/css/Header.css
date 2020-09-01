@@ -72,7 +72,7 @@
 	font-size: 27px;
 }
 .header__optionBasket:hover {
-	color: rgb(4, 182, 4);
+	color: #f0c14b;
 }
 .header__basketCount {
 	margin-left: 10px;
@@ -89,7 +89,7 @@
 	margin: 0px 15px 0px 0px;
 }
 .header__backIcon:hover {
-	background-color: red;
+	background-color: #f0c14b;
 	border-radius: 20px;
 }
 /* menu */

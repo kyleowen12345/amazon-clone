@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ArrowUpwardOutlinedIcon from "@material-ui/icons/ArrowUpwardOutlined";
 import "../css/ScrollTop.css";
 import { useWindowScroll } from "react-use";
 
@@ -8,7 +8,7 @@ const ScrollTop = () => {
 	const [visible, setVisibility] = useState(false);
 
 	useEffect(() => {
-		if (pageYOffset > 500) {
+		if (pageYOffset > 900) {
 			setVisibility(true);
 		} else {
 			setVisibility(false);
@@ -22,7 +22,7 @@ const ScrollTop = () => {
 	}
 	return (
 		<div className="scroll__toTop" onClick={scrollToTop}>
-			<ExpandLessIcon />
+			<ArrowUpwardOutlinedIcon />
 		</div>
 	);
 };

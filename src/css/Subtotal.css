@@ -9,10 +9,19 @@
 	background-color: #f3f3f3;
 	border: 1px solid #dddddd;
 	border-radius: 3px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.subtotal > p {
+	font-size: 14px;
+}
+.subtotal > p > strong {
+	font-size: 15px;
 }
 .subtotal__gift {
 	display: flex;
 	align-items: center;
+	font-size: 15px;
 }
 .subtotal__gift > input {
 	margin-right: 5px;
@@ -26,17 +35,43 @@
 	margin-top: 10px;
 	border-color: #a88734 #9c7e31 #846a29;
 	color: #111;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+/* modal */
+.subtotal__modal {
+	display: "flex";
+	align-items: "center";
+	justify-content: "center";
+	margin-top: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50vw;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 350;
+}
+.subtotal__confirmbutton {
+	padding: 10px 15px;
+	margin: 0px 40px;
+	border-radius: 5px;
+	background-color: #f0c14b;
+	border-color: #a88734 #9c7e31 #846a29;
+	font-size: 17px;
+	cursor: pointer;
+}
+.subtotal__modalInsides {
+	background-color: #f3f3f3;
+	padding: 30px;
+	border-radius: 5px;
+	border: none;
+}
+.subtotal__modalcost {
+	margin-top: 10px;
+	font-size: 15px;
 }
 @media only screen and (max-width: 700px) {
 	.subtotal {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
 		width: 250px;
-		height: 100px;
-		padding: 20px;
-		background-color: #f3f3f3;
-		border: 1px solid #dddddd;
-		border-radius: 3px;
 	}
 }

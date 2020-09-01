@@ -8,6 +8,9 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.checkout__empty {
+	font-weight: 400;
+}
 .checkout__title {
 	margin-right: 10px;
 	padding: 10px;
@@ -19,7 +22,7 @@
 	color: #0066c0;
 }
 .checkout__logintext {
-	font-weight: 500;
+	font-weight: 400;
 }
 @media only screen and (max-width: 700px) {
 	.checkout {

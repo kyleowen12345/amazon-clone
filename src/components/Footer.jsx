@@ -5,7 +5,7 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<footer>
-				@This is just a Clone and it's not even close to the real one....
+				This is just a Clone and it's not even close to the real one....
 			</footer>
 		</div>
 	);

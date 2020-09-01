@@ -12,6 +12,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [verification, setVerification] = useState("");
 	const [loading, setLoading] = useState("");
+
 	const login = (e) => {
 		e.preventDefault();
 		if (!user) setLoading(loader);
@@ -20,7 +21,8 @@ function Login() {
 			.signInWithEmailAndPassword(email, password)
 			.then((auth) => {
 				//  logged in , redirect to homepage
-				history.push("/");
+				const userId = auth.user.uid;
+				history.push(`/buyer/:${userId}`);
 			})
 			.catch((e) => setVerification(e.message) & setLoading(""));
 	};
@@ -32,9 +34,13 @@ function Login() {
 			.createUserWithEmailAndPassword(email, password)
 			.then((auth) => {
 				// create a user adn log in
-				history.push("/");
-				db.collection("buyers").add({
+				const userId = auth.user.uid;
+
+				history.push(`/buyer/:${userId}`);
+				// console.log(userId);
+				db.collection("buyers").doc(userId).set({
 					email: email,
+					id: auth.user.uid,
 				});
 			})
 			.catch((e) => setVerification(e.message) & setLoading(""));

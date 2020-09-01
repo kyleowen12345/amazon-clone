@@ -1,37 +1,35 @@
 .scroll__toTop {
 	position: fixed;
-	bottom: 150px;
-	left: 50%;
+	bottom: 20px;
+	left: 48%;
 	width: 50px;
 	height: 50px;
 	z-index: 1;
 }
 .scroll__toTop > .MuiSvgIcon-root {
 	margin-top: 10px;
-	font-size: 90px;
+	font-size: 60px;
 	animation: scrollTop 0.5s alternate ease infinite;
 	cursor: pointer;
-	background-color: #f15a23;
-	color: #eaeded;
+	color: #131921;
 	border-radius: 100%;
 }
-.scroll__toTop > .MuiSvgIcon-root:hover {
-	background-color: #ffffff00;
-	color: #f15a23;
-}
+
 @keyframes scrollTop {
 	from {
-		transform: translateY(-5px);
+		transform: translateY(-2px);
 	}
 	to {
-		transform: translateY(10px);
+		transform: translateY(2px);
 	}
 }
 @media only screen and (max-width: 700px) {
 	.scroll__toTop > .MuiSvgIcon-root {
-		font-size: 50px;
+		color: #131921;
+		font-size: 35px;
 	}
 	.scroll__toTop {
-		bottom: 113px;
+		bottom: 10px;
+		left: 45%;
 	}
 }

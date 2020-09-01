@@ -3,34 +3,33 @@ import "../css/Subtotal.css";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../context/StateProvider";
 import { getBasketTotal } from "../context/reducer";
-import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+// import { db } from "../firebase";
 
 function Subtotal() {
-	const [{ basket, quantity }] = useStateValue();
+	const [{ basket }, dispatch] = useStateValue();
+	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
-	const useStyles = makeStyles((theme) => ({
-		modal: {
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-		},
-		paper: {
-			backgroundColor: theme.palette.background.paper,
-			border: "2px solid #000",
-			boxShadow: theme.shadows[5],
-			padding: theme.spacing(2, 4, 3),
-		},
-	}));
-	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
+	// const basketTitle = basket.map((b) => b.title);
 	const handleOpen = () => {
 		setOpen(true);
+		// setModalBaskets(basketTitle);
 	};
 	const handleClose = () => {
 		setOpen(false);
+	};
+	const handleBuy = () => {
+		console.log(basket.map((b) => b.price));
+		setOpen(false);
+		// db.collection('buyers').doc(d)
+	};
+	const handleClear = () => {
+		dispatch({
+			type: "CLEAR_BASKET",
+		});
 	};
 
 	return (
@@ -48,7 +47,7 @@ function Subtotal() {
 					</>
 				)}
 				decimalScale={2}
-				value={getBasketTotal(basket, quantity)}
+				value={getBasketTotal(basket)}
 				displayType={"text"}
 				thousandSeparator={true}
 				prefix={"$"}
@@ -57,10 +56,17 @@ function Subtotal() {
 				<button type="button" onClick={handleOpen} className="subtotal__button">
 					Buy Item(s)
 				</button>
+				{basket.length > 3 ? (
+					<button className="subtotal__button" onClick={handleClear}>
+						Clear Basket
+					</button>
+				) : (
+					<></>
+				)}
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
-					className={classes.modal}
+					// className={classes.modal}
 					open={open}
 					onClose={handleClose}
 					closeAfterTransition
@@ -68,15 +74,24 @@ function Subtotal() {
 					BackdropProps={{
 						timeout: 500,
 					}}
+					className="subtotal__modal"
 				>
 					<Fade in={open}>
-						<div className={classes.paper}>
-							<h3 id="transition-modal-title">
-								Are you Sure that you will buy this item
-							</h3>
+						<div className="subtotal__modalInsides">
+							<p id="transition-modal-title">
+								Are you Sure that you want to buy this item(s)?
+							</p>
+							<p className="subtotal__modalcost">
+								Total costs: ${Math.round(getBasketTotal(basket))}
+							</p>
+
 							<br />
-							<button onClick={handleClose}>Yes</button>
-							<button onClick={handleClose}>No</button>
+							<button onClick={handleBuy} className="subtotal__confirmbutton">
+								Yes
+							</button>
+							<button onClick={handleClose} className="subtotal__confirmbutton">
+								No
+							</button>
 						</div>
 					</Fade>
 				</Modal>
