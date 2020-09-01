@@ -42,8 +42,8 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
-					{/* {user ? (
-						<Route path="/home/:id">
+					{user ? (
+						<Route path="/buyer/:id">
 							<Header />
 							<Home />
 							<ScrollTop />
@@ -56,13 +56,13 @@ function App() {
 							<ScrollTop />
 							<Footer />
 						</Route>
-					)} */}
-					<Route path="/">
+					)}
+					{/* <Route path="/">
 						<Header />
 						<Home />
 						<ScrollTop />
 						<Footer />
-					</Route>
+					</Route> */}
 				</Switch>
 			</Router>
 		</div>

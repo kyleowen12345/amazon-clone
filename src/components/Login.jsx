@@ -22,7 +22,7 @@ function Login() {
 			.then((auth) => {
 				//  logged in , redirect to homepage
 				const userId = auth.user.uid;
-				history.push(`/buyer/:${userId}`);
+				history.push(`/buyer/${userId}`);
 			})
 			.catch((e) => setVerification(e.message) & setLoading(""));
 	};
