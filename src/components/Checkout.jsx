@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../context/StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import "../css/Checkout.css";
 import Subtotal from "./Subtotal";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { db } from "../firebase";
 
 function Checkout() {
-	const [{ basket, user }] = useStateValue();
+	const [{ user }] = useStateValue();
+	const [basketContainer, setBasketContainer] = useState([]);
+	const { buyerId } = useParams();
+	useEffect(() => {
+		db.collection("buyers")
+			.doc(buyerId)
+			.collection("basket")
+			.orderBy("purchasedAt", "desc")
+			.get()
+			.then((snapshot) =>
+				setBasketContainer(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						item: doc.data(),
+					}))
+				)
+			);
+	}, [buyerId]);
+	console.log(basketContainer.map((bas) => bas.item.price));
 
 	return (
 		<div className="checkout">
 			<div className="checkout__left">
-				{!user ? <div></div> : basket.length > 0 && <Subtotal />}
+				{!user ? (
+					<div></div>
+				) : (
+					basketContainer?.length > 0 && (
+						<Subtotal basketContainer={basketContainer} />
+					)
+				)}
 				{!user ? (
 					<h2 className="checkout__logintext">
 						You must{" "}
@@ -21,7 +46,7 @@ function Checkout() {
 						</Link>{" "}
 						first to use the basket
 					</h2>
-				) : basket?.length === 0 ? (
+				) : basketContainer?.length === 0 ? (
 					<div>
 						<h2 className="checkout__empty">Your Shopping Basket is empty</h2>
 						<p>
@@ -36,15 +61,15 @@ function Checkout() {
 						{!user ? (
 							<div></div>
 						) : (
-							basket.map((item) => {
+							basketContainer?.map((bas) => {
 								return (
 									<CheckoutProduct
 										key={uuid()}
-										id={item.id}
-										title={item.title}
-										image={item.image}
-										price={item.price}
-										rating={item.rating}
+										id={bas.id}
+										title={bas.item.title}
+										image={bas.item.image}
+										price={bas.item.price}
+										rating={bas.item.rating}
 									/>
 								);
 							})

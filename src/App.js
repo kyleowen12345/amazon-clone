@@ -9,9 +9,11 @@ import { useStateValue } from "./context/StateProvider";
 import { auth } from "./firebase";
 import Footer from "./components/Footer";
 import ScrollTop from "./components/ScrollTop";
+// import BasketProvider from "./context/BasketProvider";
 
 function App() {
 	const [{ user }, dispatch] = useStateValue();
+
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
@@ -19,6 +21,7 @@ function App() {
 					type: "SET_USER",
 					user: authUser,
 				});
+				console.log(authUser);
 			} else {
 				dispatch({
 					type: "SET_USER",
@@ -30,39 +33,27 @@ function App() {
 			unsubscribe();
 		};
 	}, [user, dispatch]);
+
 	return (
 		<div className="app">
 			<Router>
 				<Switch>
-					<Route path="/checkout">
+					{/* <BasketProvider> */}
+					<Route path="/checkout/:buyerId">
 						<Header backButton="/" />
 						<Checkout />
 						<ScrollTop />
 					</Route>
+					{/* </BasketProvider> */}
 					<Route path="/login">
 						<Login />
 					</Route>
-					{user ? (
-						<Route path="/buyer/:id">
-							<Header />
-							<Home />
-							<ScrollTop />
-							<Footer />
-						</Route>
-					) : (
-						<Route path="/">
-							<Header />
-							<Home />
-							<ScrollTop />
-							<Footer />
-						</Route>
-					)}
-					{/* <Route path="/">
+					<Route path="/">
 						<Header />
 						<Home />
 						<ScrollTop />
 						<Footer />
-					</Route> */}
+					</Route>
 				</Switch>
 			</Router>
 		</div>

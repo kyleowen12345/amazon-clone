@@ -12,15 +12,9 @@ import Menu from "./Menu";
 
 function Header({ backButton }) {
 	const history = useHistory();
-	const [{ basket, user }] = useStateValue();
+	const [{ user }] = useStateValue();
 	const [open, setOpen] = useState(false);
-	// const [emailId, setEmailId]=useState('')
-	// useEffect(()=>{
-	// 	db.collection('buyers').onSnapshot(snapshot=>setEmailId(snapshot.docs.map(doc=> ({
-	// 		id:doc.id,
-	// 		email:doc.data().email
-	// 	}))))
-	// },[user])
+
 	const login = () => {
 		if (user) {
 			auth.signOut();
@@ -55,14 +49,10 @@ function Header({ backButton }) {
 								<ArrowBackIcon fontSize="large" className="header__backIcon" />
 							</div>
 						) : (
-							<Link to="/checkout" className="header__link">
+							<Link to={`/checkout/${user?.uid}`} className="header__link">
 								<div className="header__optionBasket">
 									{/* Shopping basket icon */}
 									<ShoppingBasketIcon />
-									{/* Number of items in the basket */}
-									<span className="header__optionLineTwo header__basketCount">
-										{user === null ? 0 : basket?.length}
-									</span>
 								</div>
 							</Link>
 						)}
@@ -130,14 +120,10 @@ function Header({ backButton }) {
 						<ArrowBackIcon fontSize="large" className="header__backIcon" />
 					</div>
 				) : (
-					<Link to="/checkout" className="header__link">
+					<Link to={`/checkout/${user?.uid}`} className="header__link">
 						<div className="header__optionBasket">
 							{/* Shopping basket icon */}
 							<ShoppingBasketIcon />
-							{/* Number of items in the basket */}
-							<span className="header__optionLineTwo header__basketCount">
-								{user === null ? 0 : basket?.length}
-							</span>
 						</div>
 					</Link>
 				)}

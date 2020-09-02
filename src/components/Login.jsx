@@ -21,8 +21,7 @@ function Login() {
 			.signInWithEmailAndPassword(email, password)
 			.then((auth) => {
 				//  logged in , redirect to homepage
-				const userId = auth.user.uid;
-				history.push(`/buyer/${userId}`);
+				history.push("/");
 			})
 			.catch((e) => setVerification(e.message) & setLoading(""));
 	};
@@ -36,7 +35,7 @@ function Login() {
 				// create a user adn log in
 				const userId = auth.user.uid;
 
-				history.push(`/buyer/:${userId}`);
+				history.push("/");
 				// console.log(userId);
 				db.collection("buyers").doc(userId).set({
 					email: email,

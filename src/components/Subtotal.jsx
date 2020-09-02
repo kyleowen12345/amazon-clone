@@ -8,7 +8,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 // import { db } from "../firebase";
 
-function Subtotal() {
+function Subtotal({ basketContainer }) {
 	const [{ basket }, dispatch] = useStateValue();
 	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
@@ -26,11 +26,8 @@ function Subtotal() {
 		setOpen(false);
 		// db.collection('buyers').doc(d)
 	};
-	const handleClear = () => {
-		dispatch({
-			type: "CLEAR_BASKET",
-		});
-	};
+	const totalPrice = basketContainer.map((bas) => bas.item.price);
+	console.log(totalPrice);
 
 	return (
 		<div className="subtotal">
@@ -38,7 +35,8 @@ function Subtotal() {
 				renderText={(value) => (
 					<>
 						<p>
-							Subtotal ({basket.length} item(s)) : <strong>{value}</strong>
+							Subtotal ({basketContainer.length} item(s)) :{" "}
+							<strong>{value}</strong>
 						</p>
 						<small className="subtotal__gift">
 							<input type="checkbox" />
@@ -47,7 +45,7 @@ function Subtotal() {
 					</>
 				)}
 				decimalScale={2}
-				value={getBasketTotal(basket)}
+				value={getBasketTotal(totalPrice)}
 				displayType={"text"}
 				thousandSeparator={true}
 				prefix={"$"}
@@ -56,13 +54,6 @@ function Subtotal() {
 				<button type="button" onClick={handleOpen} className="subtotal__button">
 					Buy Item(s)
 				</button>
-				{basket.length > 3 ? (
-					<button className="subtotal__button" onClick={handleClear}>
-						Clear Basket
-					</button>
-				) : (
-					<></>
-				)}
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
@@ -82,7 +73,7 @@ function Subtotal() {
 								Are you Sure that you want to buy this item(s)?
 							</p>
 							<p className="subtotal__modalcost">
-								Total costs: ${Math.round(getBasketTotal(basket))}
+								Total costs: ${Math.round(getBasketTotal(totalPrice))}
 							</p>
 
 							<br />
