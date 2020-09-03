@@ -105,10 +105,10 @@ function Header({ backButton }) {
 						</div>
 					</Link>
 					{/* 3rd link */}
-					<Link to="/" className="header__link">
+					<Link to={`/history/${user?.uid}`} className="header__link">
 						<div className="header__option">
-							<span className="header__optionLineOne">Your</span>
-							<span className="header__optionLineTwo">Prime</span>
+							<span className="header__optionLineOne">Purchase</span>
+							<span className="header__optionLineTwo">History</span>
 						</div>
 					</Link>
 				</div>

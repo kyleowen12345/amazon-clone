@@ -114,7 +114,7 @@
 .header__menu {
 	background-color: #131921;
 	padding: 20px 10px;
-	height: 220px;
+	height: 280px;
 }
 
 .header__menu > .header__link > .header__option {
@@ -178,13 +178,16 @@ h4 {
 	.header__out {
 		font-size: 17px;
 	}
+	.header__menu {
+		height: 230px;
+	}
 }
 @media only screen and (max-width: 500px) {
 	.header__logo {
 		width: 70px;
 	}
 	.header__menu {
-		height: 150px;
+		height: 220px;
 	}
 	.header__optionLineTwo {
 		font-size: 15px;

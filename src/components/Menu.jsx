@@ -39,6 +39,11 @@ const Menu = ({ login }) => {
 					<span className="header__optionLineTwo">Returns & Orders</span>
 				</div>
 			</Link>
+			<Link to={`/history/${user?.uid}`} className="header__link">
+				<div className="header__option">
+					<span className="header__optionLineTwo">Purchase History</span>
+				</div>
+			</Link>
 		</div>
 	);
 };

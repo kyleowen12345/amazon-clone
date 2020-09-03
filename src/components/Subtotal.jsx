@@ -7,6 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import { useStateValue } from "../context/StateProvider";
 import { db } from "../firebase";
 import { useParams } from "react-router-dom";
+import firebase from "firebase";
 
 function Subtotal({ basketContainer }) {
 	const [{ user }] = useStateValue();
@@ -24,17 +25,15 @@ function Subtotal({ basketContainer }) {
 	};
 	const handleBuy = () => {
 		const basketItem = basketContainer.map((basket) => basket.item);
-		db.collection("purchasedItems").add({
+		db.collection("buyers").doc(buyerId).collection("purchasedItems").add({
+			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			account: user.email,
 			basketContainer: basketItem,
 		});
-		// const batch = db.collection("buyers").doc(buyerId).collection("basket");
 		// db.collection("buyers")
 		// 	.doc(buyerId)
 		// 	.collection("basket")
-		// 	.onSnapshot((snapshot) =>
-		// 		snapshot.docs.map((doc) => batch.doc(doc.id).delete())
-		// 	);
+		// 	.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
 
 		setOpen(false);
 		alert("You just bought the basket");
