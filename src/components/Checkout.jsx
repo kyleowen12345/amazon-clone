@@ -6,18 +6,20 @@ import Subtotal from "./Subtotal";
 import { Link, useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebase";
+// import FlipMove from "react-flip-move";
 
 function Checkout() {
 	const [{ user }] = useStateValue();
 	const [basketContainer, setBasketContainer] = useState([]);
 	const { buyerId } = useParams();
+
 	useEffect(() => {
-		db.collection("buyers")
+		const unsubscribe = db
+			.collection("buyers")
 			.doc(buyerId)
 			.collection("basket")
 			.orderBy("purchasedAt", "desc")
-			.get()
-			.then((snapshot) =>
+			.onSnapshot((snapshot) =>
 				setBasketContainer(
 					snapshot.docs.map((doc) => ({
 						id: doc.id,
@@ -25,6 +27,9 @@ function Checkout() {
 					}))
 				)
 			);
+		return () => {
+			unsubscribe();
+		};
 	}, [buyerId]);
 	console.log(basketContainer.map((bas) => bas.item.price));
 
@@ -58,6 +63,7 @@ function Checkout() {
 					<div>
 						<h2 className="checkout__title">Your Shopping Basket</h2>
 						{/* list of all checkout products */}
+
 						{!user ? (
 							<div></div>
 						) : (

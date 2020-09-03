@@ -25,16 +25,7 @@ function Product({ id, title, price, rating, image }) {
 				rating: rating,
 				purchasedAt: firebase.firestore.FieldValue.serverTimestamp(),
 			});
-		// dispatch({
-		// 	type: "ADD_TO_BASKET",
-		// 	item: {
-		// 		id,
-		// 		title,
-		// 		image,
-		// 		price,
-		// 		rating,
-		// 	},
-		// });
+
 		return () => {
 			unsubscribe();
 		};

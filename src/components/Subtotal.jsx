@@ -1,17 +1,18 @@
 import React from "react";
 import "../css/Subtotal.css";
 import CurrencyFormat from "react-currency-format";
-import { useStateValue } from "../context/StateProvider";
-import { getBasketTotal } from "../context/reducer";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-// import { db } from "../firebase";
+import { useStateValue } from "../context/StateProvider";
+import { db } from "../firebase";
+import { useParams } from "react-router-dom";
 
 function Subtotal({ basketContainer }) {
-	const [{ basket }, dispatch] = useStateValue();
+	const [{ user }] = useStateValue();
 	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
+	const { buyerId } = useParams();
 	const [open, setOpen] = React.useState(false);
 	// const basketTitle = basket.map((b) => b.title);
 	const handleOpen = () => {
@@ -22,12 +23,28 @@ function Subtotal({ basketContainer }) {
 		setOpen(false);
 	};
 	const handleBuy = () => {
-		console.log(basket.map((b) => b.price));
+		const basketItem = basketContainer.map((basket) => basket.item);
+		db.collection("purchasedItems").add({
+			account: user.email,
+			basketContainer: basketItem,
+		});
+		// const batch = db.collection("buyers").doc(buyerId).collection("basket");
+		// db.collection("buyers")
+		// 	.doc(buyerId)
+		// 	.collection("basket")
+		// 	.onSnapshot((snapshot) =>
+		// 		snapshot.docs.map((doc) => batch.doc(doc.id).delete())
+		// 	);
+
 		setOpen(false);
-		// db.collection('buyers').doc(d)
+		alert("You just bought the basket");
 	};
-	const totalPrice = basketContainer.map((bas) => bas.item.price);
+	const totalPrice = basketContainer
+		.map((bas) => bas.item.price)
+		.reduce((a, b) => a + b, 0);
+	// console.log(getBasketTotal(totalPrice));
 	console.log(totalPrice);
+	console.log(basketContainer.map((basket) => basket.item));
 
 	return (
 		<div className="subtotal">
@@ -45,7 +62,7 @@ function Subtotal({ basketContainer }) {
 					</>
 				)}
 				decimalScale={2}
-				value={getBasketTotal(totalPrice)}
+				value={totalPrice}
 				displayType={"text"}
 				thousandSeparator={true}
 				prefix={"$"}
@@ -73,7 +90,7 @@ function Subtotal({ basketContainer }) {
 								Are you Sure that you want to buy this item(s)?
 							</p>
 							<p className="subtotal__modalcost">
-								Total costs: ${Math.round(getBasketTotal(totalPrice))}
+								Total costs: ${Math.round(totalPrice)}
 							</p>
 
 							<br />

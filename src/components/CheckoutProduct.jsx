@@ -8,7 +8,6 @@ import { db } from "../firebase";
 
 function CheckoutProduct({ id, title, price, image, rating }) {
 	const { buyerId } = useParams();
-
 	const removeBasket = async () => {
 		//   remove item
 		await db
