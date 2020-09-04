@@ -54,6 +54,12 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
+					<Route path="/:buyerId">
+						<Header />
+						<Home />
+						<ScrollTop />
+						<Footer />
+					</Route>
 					<Route path="/">
 						<Header />
 						<Home />

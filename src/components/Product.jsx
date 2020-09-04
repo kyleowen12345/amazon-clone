@@ -10,25 +10,28 @@ import firebase from "firebase";
 function Product({ id, title, price, rating, image }) {
 	const [{ user }] = useStateValue();
 	// undifined mao ning error
-	console.log(user?.uid);
-	const addToBasket = () => {
-		// ADD item to basket..
-		const unsubscribe = db
-			.collection("buyers")
-			.doc(user?.uid)
-			.collection("basket")
-			.add({
-				id: id,
-				title: title,
-				image: image,
-				price: price,
-				rating: rating,
-				purchasedAt: firebase.firestore.FieldValue.serverTimestamp(),
-			});
 
-		return () => {
-			unsubscribe();
-		};
+	const addToBasket = async () => {
+		// ADD item to basket..
+		try {
+			const unsubscribe = await db
+				.collection("buyers")
+				.doc(user?.uid)
+				.collection("basket")
+				.add({
+					id: id,
+					title: title,
+					image: image,
+					price: price,
+					rating: rating,
+					purchasedAt: firebase.firestore.FieldValue.serverTimestamp(),
+				});
+			return () => {
+				unsubscribe();
+			};
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className="product">

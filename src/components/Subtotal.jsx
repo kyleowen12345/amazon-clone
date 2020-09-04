@@ -11,6 +11,7 @@ import firebase from "firebase";
 
 function Subtotal({ basketContainer }) {
 	const [{ user }] = useStateValue();
+	const basketID = basketContainer.map((basket) => basket.id);
 	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
 	const { buyerId } = useParams();
@@ -23,17 +24,18 @@ function Subtotal({ basketContainer }) {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const handleBuy = () => {
+	const handleBuy = async () => {
 		const basketItem = basketContainer.map((basket) => basket.item);
 		db.collection("buyers").doc(buyerId).collection("purchasedItems").add({
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			account: user.email,
 			basketContainer: basketItem,
 		});
-		// db.collection("buyers")
-		// 	.doc(buyerId)
-		// 	.collection("basket")
-		// 	.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
+		await db
+			.collection("buyers")
+			.doc(buyerId)
+			.collection("basket")
+			.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
 
 		setOpen(false);
 		alert("You just bought the basket");
@@ -42,8 +44,10 @@ function Subtotal({ basketContainer }) {
 		.map((bas) => bas.item.price)
 		.reduce((a, b) => a + b, 0);
 	// console.log(getBasketTotal(totalPrice));
-	console.log(totalPrice);
-	console.log(basketContainer.map((basket) => basket.item));
+	// console.log(totalPrice);
+	// console.log(basketContainer.map((basket) => basket.item.purchased));
+
+	console.log(basketID.toString());
 
 	return (
 		<div className="subtotal">
