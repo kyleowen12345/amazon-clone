@@ -6,7 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useStateValue } from "../context/StateProvider";
 import { db } from "../firebase";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import firebase from "firebase";
 
 function Subtotal({ basketContainer }) {
@@ -14,7 +14,7 @@ function Subtotal({ basketContainer }) {
 	const basketID = basketContainer.map((basket) => basket.id);
 	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
-	const { buyerId } = useParams();
+	// const { buyerId } = useParams();
 	const [open, setOpen] = React.useState(false);
 	// const basketTitle = basket.map((b) => b.title);
 	const handleOpen = () => {
@@ -26,19 +26,28 @@ function Subtotal({ basketContainer }) {
 	};
 	const handleBuy = async () => {
 		const basketItem = basketContainer.map((basket) => basket.item);
-		db.collection("buyers").doc(buyerId).collection("purchasedItems").add({
-			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-			account: user.email,
-			basketContainer: basketItem,
-		});
-		await db
-			.collection("buyers")
-			.doc(buyerId)
-			.collection("basket")
-			.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
+		try {
+			await db
+				.collection("buyers")
+				.doc(user?.uid)
+				.collection("purchasedItems")
+				.add({
+					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+					account: user.email,
+					basketContainer: basketItem,
+				});
+			await db
+				.collection("buyers")
+				.doc(user?.uid)
+				.collection("basket")
+				.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
 
-		setOpen(false);
-		alert("You just bought the basket");
+			setOpen(false);
+			alert("You just bought the basket");
+			window.location.reload(false);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	const totalPrice = basketContainer
 		.map((bas) => bas.item.price)
@@ -97,12 +106,17 @@ function Subtotal({ basketContainer }) {
 							</p>
 
 							<br />
-							<button onClick={handleBuy} className="subtotal__confirmbutton">
-								Yes
-							</button>
-							<button onClick={handleClose} className="subtotal__confirmbutton">
-								No
-							</button>
+							<div className="subtotal__buttons">
+								<button onClick={handleBuy} className="subtotal__confirmbutton">
+									Yes
+								</button>
+								<button
+									onClick={handleClose}
+									className="subtotal__confirmbutton"
+								>
+									No
+								</button>
+							</div>
 						</div>
 					</Fade>
 				</Modal>

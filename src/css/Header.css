@@ -70,7 +70,6 @@
 }
 .header__optionBasket > .MuiSvgIcon-root {
 	font-size: 27px;
-	padding-right: 10px;
 }
 .header__optionBasket:hover {
 	color: #f0c14b;

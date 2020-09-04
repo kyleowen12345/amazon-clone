@@ -1,21 +1,23 @@
 import React from "react";
 import "../css/CheckoutProduct.css";
-// import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../context/StateProvider";
 import { v4 as uuid } from "uuid";
 import StarRateIcon from "@material-ui/icons/StarRate";
-import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 
 function CheckoutProduct({ id, title, price, image, rating }) {
-	const { buyerId } = useParams();
+	const [{ user }] = useStateValue();
 	const removeBasket = async () => {
-		//   remove item
-		await db
-			.collection("buyers")
-			.doc(buyerId)
-			.collection("basket")
-			.doc(id)
-			.delete();
+		try {
+			await db
+				.collection("buyers")
+				.doc(user?.uid)
+				.collection("basket")
+				.doc(id)
+				.delete();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (

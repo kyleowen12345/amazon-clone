@@ -3,7 +3,7 @@ import { useStateValue } from "../context/StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import "../css/Checkout.css";
 import Subtotal from "./Subtotal";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebase";
 // import FlipMove from "react-flip-move";
@@ -11,27 +11,33 @@ import { db } from "../firebase";
 function Checkout() {
 	const [{ user }] = useStateValue();
 	const [basketContainer, setBasketContainer] = useState([]);
-	const { buyerId } = useParams();
 
 	useEffect(() => {
-		const unsubscribe = db
-			.collection("buyers")
-			.doc(buyerId)
-			.collection("basket")
-			.orderBy("purchasedAt", "desc")
-			.onSnapshot((snapshot) =>
-				setBasketContainer(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						item: doc.data(),
-					}))
-				)
-			);
-		return () => {
-			unsubscribe();
-		};
-	}, [buyerId]);
-	console.log(basketContainer.map((bas) => bas.item.price));
+		async function fetchData() {
+			try {
+				const unsubscribe = await db
+					.collection("buyers")
+					.doc(user?.uid)
+					.collection("basket")
+					.orderBy("purchasedAt", "desc")
+					.onSnapshot((snapshot) =>
+						setBasketContainer(
+							snapshot.docs.map((doc) => ({
+								id: doc.id,
+								item: doc.data(),
+							}))
+						)
+					);
+				return () => {
+					unsubscribe();
+				};
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+	}, [user]);
+	// console.log(basketContainer.length);
 
 	return (
 		<div className="checkout">

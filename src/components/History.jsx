@@ -1,34 +1,65 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { db } from "../firebase";
-import { useParams } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import HistoryInfo from "./HistoryInfo";
+import { v4 as uuid } from "uuid";
 
 const History = () => {
-	const [basketContainer, setBasketContainer] = useState([]);
-	const { buyerId } = useParams();
+	const [{ user }] = useStateValue();
+	const [basketContains, setBasketContains] = useState([]);
+	// const [time, setTime] = useState("");
+	// const timeBaby = basketContainer.map((basket) => setTime(basket.timestamp));
 	useEffect(() => {
-		const unsubscribe = db
-			.collection("buyers")
-			.doc(buyerId)
-			.collection("purchasedItems")
-			.onSnapshot((snapshot) =>
-				setBasketContainer(snapshot.docs.map((doc) => doc.data()))
-			);
-		return () => {
-			unsubscribe();
+		// const abortController=new AbortController()
+		const abortController = new AbortController();
+		const fetchData = async () => {
+			try {
+				fetch(user, { signal: abortController.signal });
+				await db
+					.collection("buyers")
+					.doc(user?.uid)
+					.collection("purchasedItems")
+					.orderBy("timestamp", "desc")
+					.onSnapshot((snapshot) =>
+						setBasketContains(
+							snapshot.docs.map((doc) => ({
+								time: doc.data().timestamp,
+								basket: doc.data().basketContainer,
+							}))
+						)
+					);
+			} catch (error) {
+				console.log(error);
+			}
 		};
-	}, [buyerId]);
-	console.log(buyerId);
-	console.log(basketContainer.map((basket) => basket.timestamp));
-	console.log(
-		basketContainer.map((basket) =>
-			basket.basketContainer.map((bas) => bas.title)
-		)
-	);
+		fetchData();
+		return () => {
+			abortController.abort();
+		};
+	}, [user]);
+	// console.log(basketContains.map((bas) => bas.container));
+
+	// const time = basketContains.map((bas) =>
+	// 	new Date(bas.time.toDate()).toLocaleDateString()
+	// );
 	// console.log(basketContainer);
 	return (
 		<div>
-			<h1>This is history </h1>
+			{basketContains.map((bas) =>
+				bas.basket.map((b) => {
+					return (
+						<HistoryInfo
+							image={b.image}
+							price={b.price}
+							rating={b.rating}
+							title={b.title}
+							key={uuid()}
+							// time={time}
+						/>
+					);
+				})
+			)}
 		</div>
 	);
 };

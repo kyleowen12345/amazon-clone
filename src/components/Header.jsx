@@ -4,22 +4,46 @@ import { Link, useHistory } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "../context/StateProvider";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Menu from "./Menu";
+import { useEffect } from "react";
 
 function Header({ backButton }) {
 	const history = useHistory();
 	const [{ user }] = useStateValue();
 	const [open, setOpen] = useState(false);
+	const [basket, setBasket] = useState("");
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const unsubscribe = await db
+					.collection("buyers")
+					.doc(user?.uid)
+					.collection("basket")
+					.onSnapshot((snapshot) =>
+						setBasket(snapshot.docs.map((doc) => doc.data()))
+					);
+				return () => {
+					unsubscribe();
+				};
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchData();
+	}, [user]);
 
 	const login = () => {
 		if (user) {
 			auth.signOut();
 		}
 	};
+	console.log(user?.uid);
+	console.log(basket.length);
 	if (open) {
 		return (
 			<div className="header__humbergerMenu">
@@ -49,10 +73,13 @@ function Header({ backButton }) {
 								<ArrowBackIcon fontSize="large" className="header__backIcon" />
 							</div>
 						) : (
-							<Link to={`/checkout/${user?.uid}`} className="header__link">
+							<Link to="/checkout" className="header__link">
 								<div className="header__optionBasket">
 									{/* Shopping basket icon */}
 									<ShoppingBasketIcon />
+									<span className="header__optionLineTwo header__basketCount">
+										{user === null ? 0 : basket?.length}
+									</span>
 								</div>
 							</Link>
 						)}
@@ -105,7 +132,7 @@ function Header({ backButton }) {
 						</div>
 					</Link>
 					{/* 3rd link */}
-					<Link to={`/history/${user?.uid}`} className="header__link">
+					<Link to="/history" className="header__link">
 						<div className="header__option">
 							<span className="header__optionLineOne">Purchase</span>
 							<span className="header__optionLineTwo">History</span>
@@ -120,10 +147,13 @@ function Header({ backButton }) {
 						<ArrowBackIcon fontSize="large" className="header__backIcon" />
 					</div>
 				) : (
-					<Link to={`/checkout/${user?.uid}`} className="header__link">
+					<Link to="/checkout" className="header__link">
 						<div className="header__optionBasket">
 							{/* Shopping basket icon */}
 							<ShoppingBasketIcon />
+							<span className="header__optionLineTwo header__basketCount">
+								{user === null ? 0 : basket?.length}
+							</span>
 						</div>
 					</Link>
 				)}

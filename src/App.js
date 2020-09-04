@@ -40,12 +40,12 @@ function App() {
 			<Router>
 				<Switch>
 					{/* <BasketProvider> */}
-					<Route path="/checkout/:buyerId">
+					<Route path="/checkout">
 						<Header backButton="/" />
 						<Checkout />
 						<ScrollTop />
 					</Route>
-					<Route path="/history/:buyerId">
+					<Route path="/history">
 						<Header backButton="/" />
 						<History />
 						<ScrollTop />
