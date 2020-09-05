@@ -43,7 +43,6 @@ function Subtotal({ basketContainer }) {
 				.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
 
 			setOpen(false);
-			alert("You just bought the basket");
 			window.location.reload(false);
 		} catch (error) {
 			console.log(error);
