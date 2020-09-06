@@ -39,11 +39,21 @@ const Menu = ({ login }) => {
 					<span className="header__optionLineTwo">Returns & Orders</span>
 				</div>
 			</Link>
-			<Link to="/history" className="header__link">
-				<div className="header__option">
-					<span className="header__optionLineTwo">Purchase History</span>
-				</div>
-			</Link>
+			{!user ? (
+				<Link to="/login" className="header__link">
+					<div className="header__option">
+						<span className="header__optionLineOne">Purchase</span>
+						<span className="header__optionLineTwo">History</span>
+					</div>
+				</Link>
+			) : (
+				<Link to={`/history/${user?.uid}`} className="header__link">
+					<div className="header__option">
+						<span className="header__optionLineOne">Purchase</span>
+						<span className="header__optionLineTwo">History</span>
+					</div>
+				</Link>
+			)}
 		</div>
 	);
 };

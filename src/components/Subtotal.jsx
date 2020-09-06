@@ -11,7 +11,7 @@ import firebase from "firebase";
 
 function Subtotal({ basketContainer }) {
 	const [{ user }] = useStateValue();
-	const basketID = basketContainer.map((basket) => basket.id);
+	// const basketID = basketContainer.map((basket) => basket.id);
 	// const [modalBaskets, setModalBaskets] = useState([]);
 	// for the modal
 	// const { buyerId } = useParams();
@@ -55,7 +55,7 @@ function Subtotal({ basketContainer }) {
 	// console.log(totalPrice);
 	// console.log(basketContainer.map((basket) => basket.item.purchased));
 
-	console.log(basketID.toString());
+	// console.log(basketID.toString());
 
 	return (
 		<div className="subtotal">

@@ -10,7 +10,6 @@ import { auth } from "./firebase";
 import Footer from "./components/Footer";
 import ScrollTop from "./components/ScrollTop";
 import History from "./components/History";
-// import BasketProvider from "./context/BasketProvider";
 
 function App() {
 	const [{ user }, dispatch] = useStateValue();
@@ -22,7 +21,7 @@ function App() {
 					type: "SET_USER",
 					user: authUser,
 				});
-				console.log(authUser);
+				// console.log(authUser);
 			} else {
 				dispatch({
 					type: "SET_USER",
@@ -40,12 +39,12 @@ function App() {
 			<Router>
 				<Switch>
 					{/* <BasketProvider> */}
-					<Route path="/checkout">
+					<Route path="/checkout/:buyerId">
 						<Header backButton="/" />
 						<Checkout />
 						<ScrollTop />
 					</Route>
-					<Route path="/history">
+					<Route path="/history/:buyerId">
 						<Header backButton="/" />
 						<History />
 						<ScrollTop />

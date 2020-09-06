@@ -8,6 +8,7 @@
 	margin-right: auto;
 	margin-bottom: 15px;
 }
+
 .historyInfo__product {
 	display: flex;
 	justify-content: center;
@@ -42,7 +43,7 @@
 .historInfo__date > strong {
 	font-weight: 600;
 }
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 900px) {
 	.historInfo__img {
 		height: 150px;
 		width: 150px;

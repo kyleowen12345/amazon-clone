@@ -3,7 +3,10 @@ import "../css/HistoryInfo.css";
 import { v4 as uuid } from "uuid";
 import StarRateIcon from "@material-ui/icons/StarRate";
 
-const HistoryInfo = ({ image, price, rating, title, time, date }) => {
+const HistoryInfo = ({ image, title, price, rating, date, time }) => {
+	// const time = basket
+	// 	.map((bas) => bas.time)
+	// 	.map((t) => new Date(t.toDate()).toLocaleDateString());
 	// console.log(time);
 	return (
 		<div className="historyInfo">

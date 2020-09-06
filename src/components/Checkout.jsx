@@ -3,40 +3,34 @@ import { useStateValue } from "../context/StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import "../css/Checkout.css";
 import Subtotal from "./Subtotal";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebase";
 // import FlipMove from "react-flip-move";
+import Loader from "react-loader-spinner";
 
 function Checkout() {
 	const [{ user }] = useStateValue();
 	const [basketContainer, setBasketContainer] = useState([]);
-
+	const { buyerId } = useParams();
 	useEffect(() => {
-		async function fetchData() {
-			try {
-				const unsubscribe = await db
-					.collection("buyers")
-					.doc(user?.uid)
-					.collection("basket")
-					.orderBy("purchasedAt", "desc")
-					.onSnapshot((snapshot) =>
-						setBasketContainer(
-							snapshot.docs.map((doc) => ({
-								id: doc.id,
-								item: doc.data(),
-							}))
-						)
-					);
-				return () => {
-					unsubscribe();
-				};
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		fetchData();
-	}, [user]);
+		const unsubscribe = db
+			.collection("buyers")
+			.doc(buyerId)
+			.collection("basket")
+			.orderBy("purchasedAt", "desc")
+			.onSnapshot((snapshot) =>
+				setBasketContainer(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						item: doc.data(),
+					}))
+				)
+			);
+		return () => {
+			unsubscribe();
+		};
+	}, [buyerId]);
 	// console.log(basketContainer.length);
 
 	return (
@@ -50,13 +44,15 @@ function Checkout() {
 					)
 				)}
 				{!user ? (
-					<h2 className="checkout__logintext">
-						You must{" "}
-						<Link to="/login" className="checkout__login">
-							Login
-						</Link>{" "}
-						first to use the basket
-					</h2>
+					<div className="app__loader">
+						<Loader
+							type="ThreeDots"
+							color="#f0c14b"
+							height={150}
+							width={150}
+							timeout={3000} //3 secs
+						/>
+					</div>
 				) : basketContainer?.length === 0 ? (
 					<div>
 						<h2 className="checkout__empty">Your Shopping Basket is empty</h2>
@@ -71,7 +67,15 @@ function Checkout() {
 						{/* list of all checkout products */}
 
 						{!user ? (
-							<div></div>
+							<div className="app__loader">
+								<Loader
+									type="Puff"
+									color="#00BFFF"
+									height={100}
+									width={100}
+									timeout={3000} //3 secs
+								/>
+							</div>
 						) : (
 							basketContainer?.map((bas) => {
 								return (

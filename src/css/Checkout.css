@@ -24,6 +24,7 @@
 .checkout__logintext {
 	font-weight: 400;
 }
+
 @media only screen and (max-width: 700px) {
 	.checkout {
 		display: flex;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../css/Header.css";
 import { Link, useHistory } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useStateValue } from "../context/StateProvider";
 import { auth, db } from "../firebase";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -42,8 +42,8 @@ function Header({ backButton }) {
 			auth.signOut();
 		}
 	};
-	console.log(user?.uid);
-	console.log(basket.length);
+	// console.log(user?.uid);
+	// console.log(basket.length);
 	if (open) {
 		return (
 			<div className="header__humbergerMenu">
@@ -73,10 +73,10 @@ function Header({ backButton }) {
 								<ArrowBackIcon fontSize="large" className="header__backIcon" />
 							</div>
 						) : (
-							<Link to="/checkout" className="header__link">
+							<Link to={`/checkout/${user?.uid}`} className="header__link">
 								<div className="header__optionBasket">
 									{/* Shopping basket icon */}
-									<ShoppingBasketIcon />
+									<ShoppingCartIcon />
 									<span className="header__optionLineTwo header__basketCount">
 										{user === null ? 0 : basket?.length}
 									</span>
@@ -132,12 +132,21 @@ function Header({ backButton }) {
 						</div>
 					</Link>
 					{/* 3rd link */}
-					<Link to="/history" className="header__link">
-						<div className="header__option">
-							<span className="header__optionLineOne">Purchase</span>
-							<span className="header__optionLineTwo">History</span>
-						</div>
-					</Link>
+					{!user ? (
+						<Link to="/login" className="header__link">
+							<div className="header__option">
+								<span className="header__optionLineOne">Purchase</span>
+								<span className="header__optionLineTwo">History</span>
+							</div>
+						</Link>
+					) : (
+						<Link to={`/history/${user?.uid}`} className="header__link">
+							<div className="header__option">
+								<span className="header__optionLineOne">Purchase</span>
+								<span className="header__optionLineTwo">History</span>
+							</div>
+						</Link>
+					)}
 				</div>
 				<div className="header__humber" onClick={() => setOpen(!open)}>
 					<MenuIcon />
@@ -147,10 +156,13 @@ function Header({ backButton }) {
 						<ArrowBackIcon fontSize="large" className="header__backIcon" />
 					</div>
 				) : (
-					<Link to="/checkout" className="header__link">
+					<Link
+						to={!user ? "/login" : `/checkout/${user?.uid}`}
+						className="header__link"
+					>
 						<div className="header__optionBasket">
 							{/* Shopping basket icon */}
-							<ShoppingBasketIcon />
+							<ShoppingCartIcon />
 							<span className="header__optionLineTwo header__basketCount">
 								{user === null ? 0 : basket?.length}
 							</span>
