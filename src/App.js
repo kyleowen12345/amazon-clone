@@ -38,7 +38,6 @@ function App() {
 		<div className="app">
 			<Router>
 				<Switch>
-					{/* <BasketProvider> */}
 					<Route path="/checkout/:buyerId">
 						<Header backButton="/" />
 						<Checkout />
@@ -49,15 +48,8 @@ function App() {
 						<History />
 						<ScrollTop />
 					</Route>
-					{/* </BasketProvider> */}
 					<Route path="/login">
 						<Login />
-					</Route>
-					<Route path="/:buyerId">
-						<Header />
-						<Home />
-						<ScrollTop />
-						<Footer />
 					</Route>
 					<Route path="/">
 						<Header />

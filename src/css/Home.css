@@ -4,10 +4,14 @@
 	margin-right: auto;
 }
 .home__row {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-auto-rows: auto auto;
+	grid-column-gap: 80px;
 	z-index: 1;
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 69vw;
 }
 .home__image {
 	width: 100%;
@@ -15,14 +19,16 @@
 	z-index: -1;
 	margin-bottom: -150px;
 }
-@media only screen and (max-width: 700px) {
+.home__loader {
+	display: flex;
+	justify-content: center;
+}
+@media only screen and (max-width: 850px) {
 	.home__row {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		z-index: 1;
-		margin-left: 5px;
-		margin-right: 5px;
 	}
 	.home__image {
 		width: 100%;

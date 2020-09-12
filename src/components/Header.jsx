@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Header.css";
 import { Link, useHistory } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,7 +9,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Menu from "./Menu";
-import { useEffect } from "react";
 
 function Header({ backButton }) {
 	const history = useHistory();
@@ -30,9 +29,7 @@ function Header({ backButton }) {
 				return () => {
 					unsubscribe();
 				};
-			} catch (error) {
-				console.log(error);
-			}
+			} catch (error) {}
 		}
 		fetchData();
 	}, [user]);
@@ -42,8 +39,6 @@ function Header({ backButton }) {
 			auth.signOut();
 		}
 	};
-	// console.log(user?.uid);
-	// console.log(basket.length);
 	if (open) {
 		return (
 			<div className="header__humbergerMenu">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Subtotal.css";
 import CurrencyFormat from "react-currency-format";
 import Modal from "@material-ui/core/Modal";
@@ -6,20 +6,21 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useStateValue } from "../context/StateProvider";
 import { db } from "../firebase";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import firebase from "firebase";
 
 function Subtotal({ basketContainer }) {
 	const [{ user }] = useStateValue();
-	// const basketID = basketContainer.map((basket) => basket.id);
-	// const [modalBaskets, setModalBaskets] = useState([]);
-	// for the modal
-	// const { buyerId } = useParams();
-	const [open, setOpen] = React.useState(false);
-	// const basketTitle = basket.map((b) => b.title);
+	const { buyerId } = useParams();
+	const [open, setOpen] = useState(false);
+	const [warning, setWarning] = useState("");
 	const handleOpen = () => {
+		if (basketContainer.length > 10) {
+			setWarning("You can only get 10 items in the basket per purchase");
+		} else {
+			setWarning("");
+		}
 		setOpen(true);
-		// setModalBaskets(basketTitle);
 	};
 	const handleClose = () => {
 		setOpen(false);
@@ -29,7 +30,7 @@ function Subtotal({ basketContainer }) {
 		try {
 			await db
 				.collection("buyers")
-				.doc(user?.uid)
+				.doc(buyerId)
 				.collection("purchasedItems")
 				.add({
 					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -38,7 +39,7 @@ function Subtotal({ basketContainer }) {
 				});
 			await db
 				.collection("buyers")
-				.doc(user?.uid)
+				.doc(buyerId)
 				.collection("basket")
 				.onSnapshot((snapshot) => snapshot.docs.map((doc) => doc.ref.delete()));
 
@@ -51,11 +52,6 @@ function Subtotal({ basketContainer }) {
 	const totalPrice = basketContainer
 		.map((bas) => bas.item.price)
 		.reduce((a, b) => a + b, 0);
-	// console.log(getBasketTotal(totalPrice));
-	// console.log(totalPrice);
-	// console.log(basketContainer.map((basket) => basket.item.purchased));
-
-	// console.log(basketID.toString());
 
 	return (
 		<div className="subtotal">
@@ -97,25 +93,45 @@ function Subtotal({ basketContainer }) {
 				>
 					<Fade in={open}>
 						<div className="subtotal__modalInsides">
-							<p id="transition-modal-title">
-								Are you Sure that you want to buy this item(s)?
-							</p>
-							<p className="subtotal__modalcost">
-								Total costs: ${Math.round(totalPrice)}
-							</p>
+							{basketContainer.length > 10 ? (
+								<>
+									<p id="transition-modal-title">{warning}</p>
+									<br />
+									<div className="subtotal__buttons">
+										<button
+											onClick={handleClose}
+											className="subtotal__confirmbutton"
+										>
+											Ok
+										</button>
+									</div>
+								</>
+							) : (
+								<>
+									<p id="transition-modal-title">
+										Are you Sure that you want to buy this item(s)
+									</p>
+									<p className="subtotal__modalcost">
+										Total costs: ${Math.round(totalPrice)}
+									</p>
 
-							<br />
-							<div className="subtotal__buttons">
-								<button onClick={handleBuy} className="subtotal__confirmbutton">
-									Yes
-								</button>
-								<button
-									onClick={handleClose}
-									className="subtotal__confirmbutton"
-								>
-									No
-								</button>
-							</div>
+									<br />
+									<div className="subtotal__buttons">
+										<button
+											onClick={handleBuy}
+											className="subtotal__confirmbutton"
+										>
+											Yes
+										</button>
+										<button
+											onClick={handleClose}
+											className="subtotal__confirmbutton"
+										>
+											No
+										</button>
+									</div>
+								</>
+							)}
 						</div>
 					</Fade>
 				</Modal>

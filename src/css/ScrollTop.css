@@ -11,7 +11,7 @@
 	font-size: 60px;
 	animation: scrollTop 0.5s alternate ease infinite;
 	cursor: pointer;
-	color: #131921;
+	color: #f5c15e;
 	border-radius: 100%;
 }
 
@@ -25,7 +25,7 @@
 }
 @media only screen and (max-width: 700px) {
 	.scroll__toTop > .MuiSvgIcon-root {
-		color: #131921;
+		color: #f5c15e;
 		font-size: 35px;
 	}
 	.scroll__toTop {

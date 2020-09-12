@@ -125,15 +125,8 @@ h4 {
 	font-size: 20px;
 	font-weight: 400;
 }
-@media only screen and (max-width: 1000px) {
-	.header__search {
-		display: none;
-	}
-}
-@media only screen and (max-width: 800px) {
-	.header__search {
-		display: none;
-	}
+
+@media only screen and (max-width: 900px) {
 	.header__nav {
 		display: none;
 	}
@@ -180,6 +173,16 @@ h4 {
 	.header__menu {
 		height: 230px;
 	}
+
+	.header__searchIcon {
+		color: white;
+		margin-left: auto;
+		margin-right: 20px;
+		background-color: #131921;
+	}
+	.header__searchInput {
+		display: none;
+	}
 }
 @media only screen and (max-width: 500px) {
 	.header__logo {
@@ -195,5 +198,8 @@ h4 {
 	h4 {
 		font-size: 12px;
 		font-weight: 300;
+	}
+	.header__searchIcon {
+		margin-right: 5px;
 	}
 }

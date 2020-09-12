@@ -9,29 +9,22 @@ import firebase from "firebase";
 
 function Product({ id, title, price, rating, image }) {
 	const [{ user }] = useStateValue();
-	// undifined mao ning error
-
 	const addToBasket = async () => {
-		// ADD item to basket..
 		try {
-			const unsubscribe = await db
-				.collection("buyers")
-				.doc(user?.uid)
-				.collection("basket")
-				.add({
-					id: id,
-					title: title,
-					image: image,
-					price: price,
-					rating: rating,
-					purchasedAt: firebase.firestore.FieldValue.serverTimestamp(),
-				});
-			return () => {
-				unsubscribe();
-			};
+			await db.collection("buyers").doc(user?.uid).collection("basket").add({
+				id: id,
+				title: title,
+				image: image,
+				price: price,
+				rating: rating,
+				purchasedAt: firebase.firestore.FieldValue.serverTimestamp(),
+			});
 		} catch (error) {
 			console.log(error);
 		}
+	};
+	const handleView = () => {
+		alert("works");
 	};
 	return (
 		<div className="product">
@@ -50,7 +43,7 @@ function Product({ id, title, price, rating, image }) {
 						))}
 				</div>
 			</div>
-			<img src={image} alt="" />
+			<img src={image} alt="" onClick={handleView} />
 			{user === null ? (
 				<Link to="/login" className="product__blank">
 					<span>See more</span>

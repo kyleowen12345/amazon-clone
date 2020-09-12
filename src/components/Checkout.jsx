@@ -6,7 +6,6 @@ import Subtotal from "./Subtotal";
 import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { db } from "../firebase";
-// import FlipMove from "react-flip-move";
 import Loader from "react-loader-spinner";
 
 function Checkout() {
@@ -14,24 +13,27 @@ function Checkout() {
 	const [basketContainer, setBasketContainer] = useState([]);
 	const { buyerId } = useParams();
 	useEffect(() => {
-		const unsubscribe = db
-			.collection("buyers")
-			.doc(buyerId)
-			.collection("basket")
-			.orderBy("purchasedAt", "desc")
-			.onSnapshot((snapshot) =>
-				setBasketContainer(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						item: doc.data(),
-					}))
-				)
-			);
-		return () => {
-			unsubscribe();
-		};
-	}, [buyerId]);
-	// console.log(basketContainer.length);
+		if (user?.uid !== buyerId) {
+			setBasketContainer([]);
+		} else {
+			const unsubscribe = db
+				.collection("buyers")
+				.doc(buyerId)
+				.collection("basket")
+				.orderBy("purchasedAt", "desc")
+				.onSnapshot((snapshot) =>
+					setBasketContainer(
+						snapshot.docs.map((doc) => ({
+							id: doc.id,
+							item: doc.data(),
+						}))
+					)
+				);
+			return () => {
+				unsubscribe();
+			};
+		}
+	}, [buyerId, user]);
 
 	return (
 		<div className="checkout">

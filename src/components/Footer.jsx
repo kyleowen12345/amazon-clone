@@ -5,7 +5,7 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<footer>
-				This is just a Clone and it's not even close to the real one....
+				<p>This is just a Clone and it's not even close to the real one....</p>
 				<p>Created By: Kyle Owen Ga</p>
 			</footer>
 		</div>
